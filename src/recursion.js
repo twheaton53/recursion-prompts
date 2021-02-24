@@ -7,26 +7,88 @@
 // Example: 5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5); // 120
 var factorial = function(n) {
+  // Edge if negative number
+  if (n < 0) {
+    return null;
+  }
+  // Handle base case of zero
+  if (n === 0) {
+    return 1;
+  }
+
+  return n * factorial(n-1);
 };
 
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
 var sum = function(array) {
+
+  if (array.length === 0) {
+    return 0;
+  }
+
+  if (array.length === 1) {
+    return array[0];
+  }
+
+  return array[0] + sum(array.slice(1));
+
 };
 
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
+
+// if the array is empty return zero
+
+// iterate through the array, add to the result and eventually return that result
+// if the current element is another array, iterate through that array
+
 var arraySum = function(array) {
+  var result = 0;
+
+  array.forEach((item) => {
+    if(Array.isArray(item)) {
+      result += arraySum(item);
+    } else {
+      result += item;
+    }
+  });
+  return result;
 };
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+  // If n is a zero then it is an even number
+  if (n === 0) {
+    return true;
+  }
+  // If n is a one then it is not an even number
+  if (n === 1) {
+    return false;
+  }
+  // If n is a negative number call isEven with negative n
+  if (n < 0) {
+    return isEven(-n);
+  }
+  // Call isEven with n minus 2
+  return isEven(n - 2);
 };
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
+  // If n is a zero return zero
+  if (n === 0) {
+    return 0;
+  }
+
+  if (n < 0) {
+    return n + 1 + sumBelow(n + 1);
+  }
+
+  // return current n plus sumBelow with current n minus one
+  return n - 1 + sumBelow(n-1);
 };
 
 // 6. Get the integers within a range (x, y).
