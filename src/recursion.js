@@ -92,8 +92,30 @@ var sumBelow = function(n) {
 };
 
 // 6. Get the integers within a range (x, y).
-// range(2,9); // [3,4,5,6,7,8]
+// range(8,3); // [7, 6, 5, 4]
+// range(3,8); // [4, 5, 6, 7]
 var range = function(x, y) {
+  if (y - x === 1 || y - x === 0) {
+    return [];
+  }
+
+  if (x > y) {
+    if (x - y === 2) {
+      return [x - 1];
+    } else {
+      var result = range(x, y + 1);
+      result.push(y + 1);
+      return result;
+    }
+  }
+
+  if (y - x === 2) {
+    return [x + 1];
+  } else {
+    var result = range(x, y - 1);
+    result.push(y - 1);
+    return result;
+  }
 };
 
 // 7. Compute the exponent of a number.
